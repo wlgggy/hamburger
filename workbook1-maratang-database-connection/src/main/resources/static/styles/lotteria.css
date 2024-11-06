@@ -146,9 +146,24 @@ body {
 .hamburger-box{
     position: relative;
 }
-button{
+
+#delete-btn{
     position: absolute;
     color: red;
     top: 0;
     right: 0;
+    border-width: 0;
+    background: none;
+    font-size: 30px;
+}
+
+#sale-btn{
+    position: absolute;
+    color: blue;
+    bottom: 0;
+    right: 0;
+    border-width: 0;
+    background-color: #0ea80e;
+    color: white;
+    padding: 10px 20px;
 }

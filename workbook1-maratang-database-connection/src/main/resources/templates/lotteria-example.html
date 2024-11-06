@@ -27,20 +27,22 @@
         </label>
         <label>
             <span>이름</span>
-            <input id="search-input" class="search-field" type="text" >
+            <input id="search-input" class="search-field" type="text">
         </label>
     </section>
     <section id="hamburger-list" class="inner-box list-box"></section>
 </article>
 <template id="hamburger-template">
     <div class="hamburger-box">
-        <img id="hamburger-image" alt="#" class="hamburger-image" />
+        <img id="hamburger-image" alt="#" class="hamburger-image"/>
         <p id="hamburger-name" class="hamburger-data hamburger-name"></p>
         <p id="hamburger-price" class="hamburger-data hamburger-price"></p>
         <button id="delete-btn">X</button>
+        <button id="sale-btn">판매</button>
+        <!--        <button id="delete-btn">x</button>-->
     </div>
 </template>
-<button id="test-button" onclick="window.alert('버튼 클릭')">나만의 버튼</button>
+<button id="test-button">나만의 버튼</button>
 <div id="background"></div>
 <div id="popUp">
     <h3>햄버거 추가 ᖭི(ˊᗜˋ*)ᖫྀ</h3>
@@ -108,8 +110,8 @@
     //
     // })
 
-    (function() {
-        window.addEventListener('DOMContentLoaded', function() {
+    (function () {
+        window.addEventListener('DOMContentLoaded', function () {
 
             // 추가 팝업
             const button = document.getElementById('test-button');
@@ -121,16 +123,16 @@
             const close = document.querySelector('#close')
             const background = document.querySelector('#background')
 
-            popBtn.addEventListener('click', function(){
+            popBtn.addEventListener('click', function () {
                 popUp.style.display = 'block';
                 background.style.display = 'block';
             })
-            background.addEventListener('click', function (){
+            background.addEventListener('click', function () {
                 popUp.style.display = 'none'
                 background.style.display = 'none';
             })
 
-            close.addEventListener('click', function (){
+            close.addEventListener('click', function () {
                 popUp.style.display = 'none'
                 background.style.display = 'none';
             })
@@ -163,7 +165,7 @@
                     const hamburgerTemplateClone = hamburgerTemplate.content.cloneNode(true);
                     const hamburgerDelete = hamburgerTemplateClone.getElementById('delete-btn')
 
-                    hamburgerDelete.addEventListener('click' , ()=>{
+                    hamburgerDelete.addEventListener('click', () => {
                         console.log('hamburgername')
                     });
 
@@ -191,7 +193,7 @@
             document.querySelector(".all_menu").addEventListener("click", async () => {
                 hamburgerSection.innerHTML = "";
                 const encodedValue = window.encodeURIComponent('');
-                const hamburgers = await fetch(`lotteria-menus?hamburgerName=${encodedValue}`) // 쿼리스트링
+                const hamburgers = await fetch(`/lotteria-menus?lotteria-menushamburgerName=${encodedValue}`) // 쿼리스트링
                     .then(response => response.json());
                 for (const hamburger of hamburgers) {
                     const hamburgerTemplateClone = hamburgerTemplate.content.cloneNode(true);
@@ -201,7 +203,7 @@
                     const hamburgerDelete = hamburgerTemplateClone.getElementById('delete-btn')
                     const hamburgerBox = hamburgerTemplateClone.querySelector('.hamburger-box')
 
-                    hamburgerDelete.addEventListener('click', async function(){
+                    hamburgerDelete.addEventListener('click', async function () {
                         const response = await fetch(`lotteria-delete-menu?hamburgerName=${hamburger.name}`, {
                             method: 'delete'
                         });
@@ -210,18 +212,14 @@
                             hamburgerSection.removeChild(hamburgerBox);
                         }
                     })
-                    // hamburgerDelete.addEventListener('click' , (e)=>{
-                    //     console.log(e.target.parents)
-                    //     // fetch(`lotteria-delete-menu?hamburgerName=${hamburgerName}`, {method:"DELETE"}).then(res => console.log(res))
-                    // });
 
                     hamburgerImage.setAttribute('alt', hamburger.name);
                     hamburgerImage.setAttribute('src', hamburger.imagePath);
                     hamburgerName.textContent = hamburger.name;
                     hamburgerPrice.textContent = hamburger.price;
                     hamburgerSection.appendChild(hamburgerTemplateClone);
-                    // const hamburgerName = window.encodeURIComponent(searchInput.value?.trim() ?? )
-                    }
+
+                }
             })
             // InputEvent()
         });

@@ -4,6 +4,7 @@ package kr.hs.sdh.workbook1.controller;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.hs.sdh.workbook1.entity.Hamburger;
+import kr.hs.sdh.workbook1.entity.History;
 import kr.hs.sdh.workbook1.service.HamburgerService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,6 +51,11 @@ public class HamburgerRestController {
     @DeleteMapping("/lotteria-delete-menu")
     private void lotteriaDeleteMenu(@RequestParam final String hamburgerName){
         hamburgerService.removeHamburger(hamburgerName);
+    }
+
+    @PostMapping("/hamburger-sell")
+    private String saleHamburger(History history) {
+        return ("판매완료 &ㅁ&");
     }
 
     // lotteria-delete-menu?hamburgerName

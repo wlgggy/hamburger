@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-public class LotteriaHamburgerRepository implements HamburgerRepository, InitializingBean {
+public class LotteriaHamburgerRepository implements InitializingBean {
 
     private final ObjectMapper objectMapper;
 
@@ -38,19 +38,16 @@ public class LotteriaHamburgerRepository implements HamburgerRepository, Initial
         this.deleteHamburgers = new HashSet<>(this.hamburgers.size());
     }
 
-    @Override
     public Set<Hamburger> findHamburgers() {
         return this.hamburgers;
     }
 
-    @Override
     public void deleteHamburger(Hamburger hamburger) {
         if(this.hamburgers.contains(hamburger)) {
             this.hamburgers.remove(hamburger);
         }
     }
 
-    @Override
     public void saveHamburger(Hamburger hamburger) {
 //        if (hamburgers.contains(hamburger)){
 //            hamburgers.set(hamburgers.indexOf(hamburger), hamburger);
