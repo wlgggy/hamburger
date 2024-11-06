@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lotteria</title>
+    <link rel="stylesheet" th:href="@{/styles/font.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/normalize.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/lotteria.css}"/>
+</head>
+<body>
+<header class="title-box wrap-box">
+    <h3 class="inner-box">롯데리아</h3>
+</header>
+<article class="wrap-box">
+    <section class="inner-box tab-box">
+        <label class="menu" aria-label="추천메뉴 탭" role="tab">
+            <span>추천메뉴</span>
+            <input checked="checked" hidden="hidden" name="tab-content" type="radio"/>
+        </label>
+        <label class="all_menu" aria-label="전체메뉴 탭" role="tab">
+            <span>전체메뉴</span>
+            <input hidden="hidden" name="tab-content" type="radio"/>
+        </label>
+        <label>
+            <span>버거추가</span>
+            <input id="pop-btn" type="radio" hidden="hidden">
+        </label>
+        <label>
+            <span>이름</span>
+            <input id="search-input" class="search-field" type="text" >
+        </label>
+    </section>
+    <section id="hamburger-list" class="inner-box list-box"></section>
+</article>
+<template id="hamburger-template">
+    <div class="hamburger-box">
+        <img id="hamburger-image" alt="#" class="hamburger-image" />
+        <p id="hamburger-name" class="hamburger-data hamburger-name"></p>
+        <p id="hamburger-price" class="hamburger-data hamburger-price"></p>
+        <button id="delete-btn">X</button>
+    </div>
+</template>
+<button id="test-button" onclick="window.alert('버튼 클릭')">나만의 버튼</button>
+<div id="background"></div>
+<div id="popUp">
+    <h3>햄버거 추가 ᖭི(ˊᗜˋ*)ᖫྀ</h3>
+    <form class="hamburger-add-form" method="post" action="lotteria-add-menu" enctype="multipart/form-data">
+        <label>
+            <span>☆ 햄버거 이름 ☆</span>
+            <input type="text" name="name" placeholder="햄버거 이름"/>
+        </label>
+        <label>
+            <span>☆ 햄버거 가격 ☆</span>
+            <input type="number" name="price" placeholder="햄버거 가격"/>
+        </label>
+        <label>
+            <span>☆ 이미지 경로 ☆</span>
+            <input type="file" name="image" placeholder="햄버거 이미지" accept="image/*"/>
+        </label>
+        <label>
+            <span>☆ 신제품 여부 ☆</span>
+            <input type="checkbox" name="isNew" placeholder="신제품 여부"/>
+        </label>
+        <label>
+            <span>☆ 추천 여부 ☆</span>
+            <input type="checkbox" name="isRecommended" placeholder="추천 여부"/>
+        </label>
+        <input type="submit" value="저장"/>
+    </form>
+    <p id="close">X</p>
+</div>
+<script>
+    // document.addEventListener("DOMContentLoaded", async () => {
+    //
+    //     const searchInput = document.getElementById('search-input')
+    //
+    //     const list_box = document.querySelector(".list-box")
+    //     const Hamburgers = await fetch("/lotteria-menus").then(res => res.json())
+    //     console.log(Hamburgers)
+    //     Hamburgers.forEach(el => {
+    //         const Box = document.createElement("div")
+    //         const Image = document.createElement("img")
+    //         const Name = document.createElement("p")
+    //         const Price = document.createElement("p")
+    //
+    //         Image.setAttribute("id", "hamburger-image")
+    //         Name.setAttribute("id", "hamburger-name")
+    //         Price.setAttribute("id", "hamburger-price")
+    //
+    //         Box.classList.add("hamburger-box")
+    //         Image.classList.add("hamburger-image")
+    //         Name.classList.add("hamburger-name", "hamburger-data")
+    //         Price.classList.add("hamburger-price", "hamburger-data")
+    //
+    //         Name.textContent = `${el.name}`
+    //         Price.textContent = `${el.price}`
+    //
+    //         Image.src = `${el.imagePath}`
+    //         Image.alt = `${el.name}`
+    //
+    //         Box.appendChild(Image)
+    //         Box.appendChild(Name)
+    //         Box.appendChild(Price)
+    //
+    //         list_box.appendChild(Box)
+    //
+    //     })
+    //
+    // })
+
+    (function() {
+        window.addEventListener('DOMContentLoaded', function() {
+
+            // 추가 팝업
+            const button = document.getElementById('test-button');
+            const clickEvent = new Event('click');
+
+            button.dispatchEvent(clickEvent)
+
+            const popBtn = document.querySelector('#pop-btn')
+            const close = document.querySelector('#close')
+            const background = document.querySelector('#background')
+
+            popBtn.addEventListener('click', function(){
+                popUp.style.display = 'block';
+                background.style.display = 'block';
+            })
+            background.addEventListener('click', function (){
+                popUp.style.display = 'none'
+                background.style.display = 'none';
+            })
+
+            close.addEventListener('click', function (){
+                popUp.style.display = 'none'
+                background.style.display = 'none';
+            })
+
+
+            const searchInput = document.getElementById('search-input');
+            // const hamburgers = (await (await fetch('lotteria-menus')).json())
+            const hamburgerSection = document.getElementById('hamburger-list');
+            const hamburgerTemplate = document.getElementById('hamburger-template');
+            //
+            // for (const hamburger of hamburgers) {
+            //     const hamburgerTemplateClone = hamburgerTemplate.content.cloneNode(true)
+            //     const hamburgerImage = hamburgerTemplateClone.getElementById('hamburger-image')
+            //     const hamburgerName = hamburgerTemplateClone.getElementById('hamburger-name')
+            //     const hamburgerPrice = hamburgerTemplateClone.getElementById('hamburger-price')
+            //
+            //     hamburgerImage.setAttribute('alt', hamburger.name)
+            //     hamburgerImage.setAttribute('src', hamburger.imagePath)
+            //     hamburgerName.textContent = hamburger.name
+            //     hamburgerPrice.textContent = hamburger.price
+            //     hamburgerSection.appendChild(hamburgerTemplateClone)
+            // }
+            const InputEvent = async (event) => {
+                const encodedValue = window.encodeURIComponent(event.target.value ?? '');
+                const hamburgers = await fetch(`lotteria-menus?hamburgerName=${encodedValue}`) // 쿼리스트링
+                    .then(response => response.json());
+
+                hamburgerSection.innerHTML = "";
+                for (const hamburger of hamburgers) {
+                    const hamburgerTemplateClone = hamburgerTemplate.content.cloneNode(true);
+                    const hamburgerDelete = hamburgerTemplateClone.getElementById('delete-btn')
+
+                    hamburgerDelete.addEventListener('click' , ()=>{
+                        console.log('hamburgername')
+                    });
+
+                    const hamburgerImage = hamburgerTemplateClone.getElementById('hamburger-image');
+                    const hamburgerName = hamburgerTemplateClone.getElementById('hamburger-name');
+                    const hamburgerPrice = hamburgerTemplateClone.getElementById('hamburger-price');
+
+
+                    hamburgerImage.setAttribute('alt', hamburger.name);
+                    hamburgerImage.setAttribute('src', hamburger.imagePath);
+                    hamburgerName.textContent = hamburger.name;
+                    hamburgerPrice.textContent = hamburger.price;
+                    hamburgerSection.appendChild(hamburgerTemplateClone);
+
+
+                    // const hamburgerName = window.encodeURIComponent(searchInput.value?.trim() ?? )
+
+                }
+            }
+            searchInput.addEventListener('input', ($event) => {
+
+                InputEvent($event)
+
+            });
+            document.querySelector(".all_menu").addEventListener("click", async () => {
+                hamburgerSection.innerHTML = "";
+                const encodedValue = window.encodeURIComponent('');
+                const hamburgers = await fetch(`lotteria-menus?hamburgerName=${encodedValue}`) // 쿼리스트링
+                    .then(response => response.json());
+                for (const hamburger of hamburgers) {
+                    const hamburgerTemplateClone = hamburgerTemplate.content.cloneNode(true);
+                    const hamburgerImage = hamburgerTemplateClone.getElementById('hamburger-image');
+                    const hamburgerName = hamburgerTemplateClone.getElementById('hamburger-name');
+                    const hamburgerPrice = hamburgerTemplateClone.getElementById('hamburger-price');
+                    const hamburgerDelete = hamburgerTemplateClone.getElementById('delete-btn')
+                    const hamburgerBox = hamburgerTemplateClone.querySelector('.hamburger-box')
+
+                    hamburgerDelete.addEventListener('click', async function(){
+                        const response = await fetch(`lotteria-delete-menu?hamburgerName=${hamburger.name}`, {
+                            method: 'delete'
+                        });
+
+                        if (response.status === 200) {
+                            hamburgerSection.removeChild(hamburgerBox);
+                        }
+                    })
+                    // hamburgerDelete.addEventListener('click' , (e)=>{
+                    //     console.log(e.target.parents)
+                    //     // fetch(`lotteria-delete-menu?hamburgerName=${hamburgerName}`, {method:"DELETE"}).then(res => console.log(res))
+                    // });
+
+                    hamburgerImage.setAttribute('alt', hamburger.name);
+                    hamburgerImage.setAttribute('src', hamburger.imagePath);
+                    hamburgerName.textContent = hamburger.name;
+                    hamburgerPrice.textContent = hamburger.price;
+                    hamburgerSection.appendChild(hamburgerTemplateClone);
+                    // const hamburgerName = window.encodeURIComponent(searchInput.value?.trim() ?? )
+                    }
+            })
+            // InputEvent()
+        });
+    })();
+</script>
+</body>
+</html>

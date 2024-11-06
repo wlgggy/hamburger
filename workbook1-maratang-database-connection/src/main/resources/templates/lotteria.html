@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lotteria</title>
+    <link rel="stylesheet" th:href="@{/styles/font.css}" />
+    <link rel="stylesheet" th:href="@{/styles/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/styles/lotteria.css}" />
+</head>
+<body>
+    <header class="title-box wrap-box">
+        <h3 class="inner-box">롯데리아</h3>
+    </header>
+    <article class="wrap-box">
+        <section class="inner-box tab-box">
+            <label aria-label="추천메뉴 탭" role="tab">
+                <span>추천메뉴</span>
+                <input checked="checked" hidden="hidden" name="tab-content" type="radio" />
+            </label>
+            <label aria-label="전체메뉴 탭" role="tab">
+                <span>전체메뉴</span>
+                <input hidden="hidden" name="tab-content" type="radio" />
+            </label>
+        </section>
+        <section class="inner-box list-box">
+            <!-- 이곳에 롯데리아 햄버거 메뉴를 출력(lotteria-example.html 참고) -->
+            <div th:each="hamburgers:${hamburgers}" class="hamburger-box">
+                <img th:src="${hamburgers.getImagePath()}" class="hamburger-image" alt="햄버거.이름">
+                <p th:text="${hamburgers.getName()}" class="hamburger-data hamburger-name"></p>
+                <p th:text="${hamburgers.getPrice()} + '원'" class="hamburger-data hamburger-price"></p>
+            </div>
+        </section>
+    </article>
+</body>
+</html>
