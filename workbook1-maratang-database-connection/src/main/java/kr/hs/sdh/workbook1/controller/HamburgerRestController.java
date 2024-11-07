@@ -53,9 +53,9 @@ public class HamburgerRestController {
         hamburgerService.removeHamburger(hamburgerName);
     }
 
-    @PostMapping("/hamburger-sell")
+    @PostMapping("/hamburger-sale")
     private String saleHamburger(History history) {
-        return ("판매완료 &ㅁ&");
+        return ("⋆ ˚｡⋆୨ 판매완료 ୧⋆ ˚｡⋆");
     }
 
     // lotteria-delete-menu?hamburgerName

@@ -1,6 +1,7 @@
 package kr.hs.sdh.workbook1.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class History {
 
@@ -11,10 +12,10 @@ public class History {
     private final LocalDateTime saleDateTime;
 
 
-    public History(String name, int price, LocalDateTime saleDateTime) {
+    public History(String name, int price ){
         this.name = name;
         this.price = price;
-        this.saleDateTime = saleDateTime;
+        this.saleDateTime = LocalDateTime.now();
     }
 
     public String getName() {

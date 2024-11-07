@@ -37,8 +37,10 @@
         <img id="hamburger-image" alt="#" class="hamburger-image"/>
         <p id="hamburger-name" class="hamburger-data hamburger-name"></p>
         <p id="hamburger-price" class="hamburger-data hamburger-price"></p>
-        <button id="delete-btn">X</button>
-        <button id="sale-btn">판매</button>
+        <div class="btn-box">
+            <button id="delete-btn">삭제</button>
+            <button id="sale-btn">판매</button>
+        </div>
         <!--        <button id="delete-btn">x</button>-->
     </div>
 </template>
@@ -164,11 +166,26 @@
                 for (const hamburger of hamburgers) {
                     const hamburgerTemplateClone = hamburgerTemplate.content.cloneNode(true);
                     const hamburgerDelete = hamburgerTemplateClone.getElementById('delete-btn')
+                    const hamburgerSale = hamburgerTemplateClone.getElementById('sale-btn')
 
                     hamburgerDelete.addEventListener('click', () => {
                         console.log('hamburgername')
                     });
 
+                    hamburgerSale.addEventListener("click", async (e) => {
+
+                        const formdata = new FormData();
+
+                        // parent brother hamburger-name.getName()
+                        const hamburgerName = e.target.parentElement.parentElement.querySelector("#hamburger-name").textContent
+                        const hamburgerPrice = e.target.parentElement.parentElement.querySelector("#hamburger-price").textContent
+
+                        formdata.append("name", hamburgerName)
+                        formdata.append("price",hamburgerPrice)
+
+                        fetch("hamburger-sale", {method:"POST", body: formdata }).then(res => res.text()).then(res => console.log(res))
+
+                    })
                     const hamburgerImage = hamburgerTemplateClone.getElementById('hamburger-image');
                     const hamburgerName = hamburgerTemplateClone.getElementById('hamburger-name');
                     const hamburgerPrice = hamburgerTemplateClone.getElementById('hamburger-price');
@@ -179,7 +196,6 @@
                     hamburgerName.textContent = hamburger.name;
                     hamburgerPrice.textContent = hamburger.price;
                     hamburgerSection.appendChild(hamburgerTemplateClone);
-
 
                     // const hamburgerName = window.encodeURIComponent(searchInput.value?.trim() ?? )
 
@@ -201,6 +217,7 @@
                     const hamburgerName = hamburgerTemplateClone.getElementById('hamburger-name');
                     const hamburgerPrice = hamburgerTemplateClone.getElementById('hamburger-price');
                     const hamburgerDelete = hamburgerTemplateClone.getElementById('delete-btn')
+                    const hamburgerSale = hamburgerTemplateClone.getElementById('sale-btn')
                     const hamburgerBox = hamburgerTemplateClone.querySelector('.hamburger-box')
 
                     hamburgerDelete.addEventListener('click', async function () {
@@ -213,6 +230,20 @@
                         }
                     })
 
+                    hamburgerSale.addEventListener("click", async (e) => {
+
+                        const formdata = new FormData();
+
+                        // parent brother hamburger-name.getName()
+                        const hamburgerName = e.target.parentElement.parentElement.querySelector("#hamburger-name").textContent
+                        const hamburgerPrice = e.target.parentElement.parentElement.querySelector("#hamburger-price").textContent
+
+                        formdata.append("name", hamburgerName)
+                        formdata.append("price",hamburgerPrice)
+
+                        fetch("hamburger-sale", {method:"POST", body: formdata }).then(res => res.text()).then(res => console.log(res))
+
+                    })
                     hamburgerImage.setAttribute('alt', hamburger.name);
                     hamburgerImage.setAttribute('src', hamburger.imagePath);
                     hamburgerName.textContent = hamburger.name;

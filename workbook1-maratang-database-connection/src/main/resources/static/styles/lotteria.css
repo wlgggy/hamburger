@@ -32,6 +32,7 @@ body {
 
 .tab-box {
     margin: 1.25rem 0;
+
     > label {
         padding: 7px 12px;
         color: #666666;
@@ -44,6 +45,45 @@ body {
             margin-left: 10px;
         }
     }
+
+    > label.all_menu {
+        padding: 7px 12px;
+        color: #666666;
+        font-size: 0.8em;
+        border-radius: 4px;
+        background-color: #dde0e366;
+        cursor: pointer;
+
+        &:has(> input:checked) {
+            color: #ffffff;
+            font-weight: 600;
+            background-color: #00a5b9;
+        }
+
+        + label {
+            margin-left: 10px;
+        }
+    }
+
+    > label.all_menu {
+        padding: 7px 12px;
+        color: #666666;
+        font-size: 0.8em;
+        border-radius: 4px;
+        background-color: #dde0e366;
+        cursor: pointer;
+
+        &:has(> input:checked) {
+            color: #ffffff;
+            font-weight: 600;
+            background-color: #00a5b9;
+        }
+
+        + label {
+            margin-left: 10px;
+        }
+    }
+
     > label.menu {
         padding: 7px 12px;
         color: #666666;
@@ -94,7 +134,8 @@ body {
         font-weight: 600;
     }
 }
-#background{
+
+#background {
     display: none;
     position: fixed;
     left: 50%;
@@ -102,9 +143,10 @@ body {
     transform: translate(-50%, -50%);
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 99;
 }
+
 #popUp {
     display: none;
     position: fixed;
@@ -116,10 +158,12 @@ body {
     z-index: 100;
     text-align: center;
 }
-#popUp > form{
+
+#popUp > form {
     display: flex;
     flex-direction: column;
 }
+
 #popUp > form > label {
     align-items: center;
     padding: 10px;
@@ -127,10 +171,12 @@ body {
     flex-direction: column;
     text-align: center;
 }
-#popUp > form > label > input{
+
+#popUp > form > label > input {
     border: none;
 }
-#close{
+
+#close {
     position: absolute;
     right: -10px;
     top: -20px;
@@ -143,27 +189,23 @@ body {
     background-color: red;
     color: white;
 }
-.hamburger-box{
+
+.hamburger-box {
     position: relative;
 }
 
-#delete-btn{
-    position: absolute;
-    color: red;
-    top: 0;
-    right: 0;
+#delete-btn {
     border-width: 0;
-    background: none;
-    font-size: 30px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 
-#sale-btn{
-    position: absolute;
-    color: blue;
-    bottom: 0;
-    right: 0;
+#sale-btn {
     border-width: 0;
     background-color: #0ea80e;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
