@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LotteriaHamburgerRepositoryTest {
 
 
-    private Set<Hamburger> hamburgers = new HashSet<>();
+    private final Set<Hamburger> hamburgers = new HashSet<>();
     @Test
     void deleteHamburger() {
 
@@ -24,9 +24,7 @@ class LotteriaHamburgerRepositoryTest {
                 false
         );
 
-        if(this.hamburgers.contains(appleHamburger)) {
-            this.hamburgers.remove(appleHamburger);
-        }
+        this.hamburgers.remove(appleHamburger);
     }
 
     @Test

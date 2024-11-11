@@ -24,7 +24,7 @@ public final class HamburgerController {
 
         List<Hamburger> newHamburgers = new ArrayList<>();
         for (Hamburger hamburger : hamburgers) {
-            if(hamburger.isRecommended() == true){
+            if(hamburger.isRecommended()){
                 newHamburgers.add(hamburger);
 
             }

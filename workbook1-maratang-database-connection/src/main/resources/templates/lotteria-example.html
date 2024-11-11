@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Lotteria</title>
@@ -21,8 +22,8 @@
             <span>전체메뉴</span>
             <input hidden="hidden" name="tab-content" type="radio"/>
         </label>
-        <label>
-            <span>버거추가</span>
+        <label sec:authorize="hasRole('ADMIN')">
+            <span >버거추가</span>
             <input id="pop-btn" type="radio" hidden="hidden">
         </label>
         <label>

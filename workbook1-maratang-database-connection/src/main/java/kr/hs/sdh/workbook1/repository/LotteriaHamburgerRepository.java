@@ -43,9 +43,7 @@ public class LotteriaHamburgerRepository implements InitializingBean {
     }
 
     public void deleteHamburger(Hamburger hamburger) {
-        if(this.hamburgers.contains(hamburger)) {
-            this.hamburgers.remove(hamburger);
-        }
+        this.hamburgers.remove(hamburger);
     }
 
     public void saveHamburger(Hamburger hamburger) {

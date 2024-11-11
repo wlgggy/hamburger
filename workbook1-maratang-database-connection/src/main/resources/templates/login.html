@@ -2,47 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>˖⁺‧₊˚♡ 로그인 ♡˚₊‧⁺˖</title>
+    <link rel="stylesheet" th:href="@{/styles/signin.css}"/>
 </head>
-<style>
-
-    #login {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .login {
-        display: flex;
-        flex-direction: column;
-        height: 100px;
-        gap: 10px;
-        align-items: center;
-
-    }
-
-    form > input {
-        width: 100px;
-    }
-
-    label {
-        text-align: center;
-    }
-</style>
 <body>
-<div id="login">
-    <h3>로그인ྀ</h3>
-    <form class="login" method="post" enctype="multipart/form-data">
-        <label>
-            <div>☆ 아이디 ☆</div>
-            <input type="text" name="id" placeholder="아이디"/>
-        </label>
-        <label>
-            <div>☆ 비밀번호 ☆</div>
-            <input type="text" name="password" placeholder="비밀번호"/>
-        </label>
-        <input type="submit" value="저장"/>
-    </form>
+<div class="container" id="container">
+    <div class="form-container">
+        <form action="/login-processing" id="login-form" method="post">
+            <h2> ₊˚ ‿︵‿︵‿︵୨୧ · · ♡ · · ୨୧‿︵‿︵‿︵ ˚₊ <br><br> 앙쌍버거로 <br> ˖⁺‧₊˚♡ 로그인 ♡˚₊‧⁺˖ <br><br>
+                ʕ•̫͡•ʕ•̫͡•ʔ•̫͡•ʔ•̫͡•ʕ•̫͡•ʔ•̫͡•ʕ•̫͡•ʕ•̫͡•ʔ•̫͡•ʔ </h2>
+            <input id="id" name="id" type="text" placeholder="아이디"/>
+            <input id="password" name="password" type="password" placeholder="비밀번호"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token }"/>
+            <button class="submit" type="submit"> ˖⁺‧₊˚♡ 로그인 ♡˚₊‧⁺˖</button>
+        </form>
+    </div>
+    <div class="overlay">
+        <img src="/images/138072D2-3803-467D-88D8-1095EF78D139.webp" alt="송지민">
+    </div>
 </div>
+<script>
+    // const userid = document.getElementById('id').value;
+    // const password = document.getElementById('password').value;
+    // const submit = document.querySelector('.submit')
+    //
+    // const user = {
+    //     "id": userid,
+    //     "password": password
+    // }
+
+    // submit.addEventListener('click', () => {
+    //     console.log(user)
+    // })
+
+            // const formElements = document.getElementById('login-form');
+            //
+            // formElements.addEventListener(function () {
+            //
+            //     const formData = new FormData();
+            //
+            //     const id = formData.get("id")
+            //     const password = formData.get("password")
+            //
+            //
+            //     const user = JSON.stringify({
+            //         "id": id,
+            //         "password": password
+            //     })
+            //
+            //     fetch('sign-in', {
+            //         method: 'post',
+            //         body: user,
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         }
+            //     }).then(function (response) {
+            //         if (response.status === 200) {
+            //             return response.json();
+            //         }
+            //
+            //     }).then(function (member) {
+            //         console.log(member);
+            //     })
+            // })
+    // submit.addEventListener("click", async (e) => {
+    //
+    //     const formdata = new FormData();
+    //
+    //     // parent brother hamburger-name.getName()
+    //     const userid = e.target.parentElement.querySelector("#id").textContent
+    //     const password = e.target.parentElement.querySelector("#password").textContent
+    //
+    //     formdata.append("id", userid)
+    //     formdata.append("password",password)
+    //
+    //     fetch("submit", {method:"POST", body: formdata }).then(res => res.text()).then(res => console.log(res))
+    //
+    // })
+
+    // 10.56.148.148:8081/sign-in
+</script>
 </body>
 </html>
